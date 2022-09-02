@@ -16,6 +16,15 @@
     "noImplicitAny": false,
     "strictBindCallApply": false,
     "forceConsistentCasingInFileNames": false,
-    "noFallthroughCasesInSwitch": false
+    "noFallthroughCasesInSwitch": false,
+    "paths": {
+      "@repositories/*": ["src/repositories/*"],
+      "@storage/*": ["src/storage/*"],
+      "@services/*": ["src/services/*"],
+      "@guards/*": ["src/guards/*"],
+      "@interceptors/*": ["src/interceptors/*"],
+      "@decorators/*": ["src/decorators/*"],
+      "@users/*": ["src/users/*"],
+    }
   }
 }
