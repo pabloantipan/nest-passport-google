@@ -29,6 +29,9 @@
       "@controllers/*": ["src/controllers/*"],
       "@logics/*": ["src/logics/*"],
       "@modules/*": ["src/modules/*"],
+      "@interfaces/*": ["src/interfaces/*"],
+      "@migrations/*": ["src/migrations/*"],
+      "@config/*": ["src/config/*"],
     }
   }
 }
