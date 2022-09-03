@@ -26,6 +26,9 @@
       "@decorators/*": ["src/decorators/*"],
       "@models/*": ["src/models/*"],
       "@dtos/*": ["src/dtos/*"],
+      "@controllers/*": ["src/controllers/*"],
+      "@logics/*": ["src/logics/*"],
+      "@modules/*": ["src/modules/*"],
     }
   }
 }
