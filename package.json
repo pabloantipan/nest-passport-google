@@ -68,8 +68,7 @@
       "^@services(.*)$": "<rootDir>/services$1",
       "^@guards(.*)$": "<rootDir>/guards$1",
       "^@interceptors(.*)$": "<rootDir>/interceptors$1",
-      "^@decorators(.*)$": "<rootDir>/decorators$1",
-      "^@users(.*)$": "<rootDir>/users$1"
+      "^@decorators(.*)$": "<rootDir>/decorators$1"
     },
     "rootDir": "src",
     "testRegex": ".*\\.spec\\.ts$",
