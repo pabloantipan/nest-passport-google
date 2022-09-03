@@ -25,6 +25,8 @@
       "@interceptors/*": ["src/interceptors/*"],
       "@decorators/*": ["src/decorators/*"],
       "@users/*": ["src/users/*"],
+      "@models/*": ["src/models/*"],
+      "@dtos/*": ["src/dtos/*"],
     }
   }
 }
