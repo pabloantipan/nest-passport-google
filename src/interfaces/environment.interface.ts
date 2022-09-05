@@ -1,5 +1,4 @@
 export interface Environment {
-  // baseUrl: string;
   ENV: string;
   PORT: number;
   WEB_SERVICE_URL: string;

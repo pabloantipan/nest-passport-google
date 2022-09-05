@@ -11,6 +11,8 @@ services:
       - MYSQL_ROOT_PASSWORD=qweqwe123
       - MYSQL_USER=pablo
       - MYSQL_PASSWORD=123pablo
+    expose:
+      - "3306"
     ports:
       - '3306:3306'
     volumes:
@@ -29,6 +31,9 @@ services:
     image: mci-auth-service
     ports:
       - 3000:3000
+    links:
+      - mysql_db_container
+
 
 volumes:
   mysql_db_data_container:

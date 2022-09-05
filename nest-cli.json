@@ -9,6 +9,11 @@
         "outDir": "./dist/src",
         "watchAssets": true
       },
+      {
+        "include": "./config/environments/*.env",
+        "outDir": "./dist/src",
+        "watchAssets": true
+      },
       "assets/*.html"
     ],
     "watchAssets": true

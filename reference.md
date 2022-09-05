@@ -16,9 +16,18 @@ docker run \
     mci-auth-service npm run start:debug
 
 ```
+
+### Running local MySQL database
+```
+docker run --name demo-mysql --rm -p 3306:3306 -e MYSQL_ROOT_PASSWORD=qweqwe123 -d mysql:8.0
+
+```
+
 ## Run Local via Docker-compose
 ### Clean for re build
 ```
+docker build -t mci-auth-service -f Dockerfile .
+
 docker-compose stop
 docker-compose kill
 docker-compose rm
