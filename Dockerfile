@@ -4,6 +4,8 @@ WORKDIR "/app"
 
 COPY . .
 
+# RUN npm i -g nestjs
+
 RUN npm ci
 
 RUN npm run build

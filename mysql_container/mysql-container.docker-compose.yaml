@@ -26,15 +26,14 @@ services:
       ADMINER_DEFAULT_SERVER: mysql_db_container
     ports:
       - 8081:8080
-  
-  mci-auth-service:
-    image: mci-auth-service
-    ports:
-      - 3000:3000
-    links:
-      - mysql_db_container
-      
 
 volumes:
   mysql_db_data_container:
     driver: local
+
+
+networks:
+  default:
+    # Use a custom driver
+    name: mci-mysql-adminer
+    driver: bridge

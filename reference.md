@@ -13,6 +13,7 @@ docker run \
     -p 3000:3000 \
     -v nodemodules:/src/node_modules \
     -v `pwd`:/app \
+    --network=mci-mysql-adminer \
     mci-auth-service npm run start:debug
 
 ```
