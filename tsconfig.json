@@ -25,6 +25,7 @@
       "@interceptors/*": ["src/interceptors/*"],
       "@decorators/*": ["src/decorators/*"],
       "@models/*": ["src/models/*"],
+      "@entities/*": ["src/entities/*"],
       "@dtos/*": ["src/dtos/*"],
       "@controllers/*": ["src/controllers/*"],
       "@logics/*": ["src/logics/*"],

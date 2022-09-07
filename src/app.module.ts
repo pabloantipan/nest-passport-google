@@ -4,8 +4,10 @@ import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
 import configuration from '@config/configuration';
-import { UsersStorageModule } from '@storage/users/users-storage.module';
+// import { UsersStorageModule } from '@storage/users/users-storage.module';
 import { defaultConnection } from '../ormconfig';
+import { UsersModule } from '@modules/users.module';
+import { AuthModule } from '@modules/auth.module';
 
 @Module({
   imports: [
@@ -19,7 +21,9 @@ import { defaultConnection } from '../ormconfig';
       load: [configuration],
     }),
     TypeOrmModule.forRoot(defaultConnection),
-    UsersStorageModule,
+    UsersModule,
+    AuthModule,
+    // UsersStorageModule,
   ],
   controllers: [AppController],
   providers: [AppService],

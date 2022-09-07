@@ -10,7 +10,7 @@ export const defaultConnection: Partial<DataSourceOptions> = {
   database: process.env.USERS_DB_NAME || 'users',
   migrations: ['dist/database/migrations/*.ts'],
   entities: ['dist/**/*.entity{.ts,.js}'],
-  synchronize: false,
+  synchronize: true,
   migrationsRun: true,
   timezone: 'Z',
 };
