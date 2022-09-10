@@ -1,8 +1,11 @@
+import { Serialize } from '@decorators/serialize.decorator';
 import { CreateUserDto } from '@dtos/users/create-user.dto';
+import { UserDto } from '@dtos/users/user.dto';
 import { AuthLogic } from '@logics/auth/auth.logic';
 import { Body, Controller, Post, Session } from '@nestjs/common';
 
 @Controller('/auth')
+@Serialize(UserDto)
 export class AuthController {
   constructor(private authLogic: AuthLogic) {}
 
