@@ -33,6 +33,7 @@
       "@interfaces/*": ["src/interfaces/*"],
       "@migrations/*": ["src/migrations/*"],
       "@config/*": ["src/config/*"],
+      "@utils/*": ["src/utils/*"],
     }
   }
 }

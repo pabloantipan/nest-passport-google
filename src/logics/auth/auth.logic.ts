@@ -1,12 +1,14 @@
 import { Injectable } from '@nestjs/common';
 import { User } from '@models/user';
-import { UsersLogic } from '@logics/users/users.logic';
+import { UsersService } from '@services/users/users.service';
+import { Utils } from '@utils/utils';
 
 @Injectable()
 export class AuthLogic {
-  constructor(private usersLogic: UsersLogic) {}
+  constructor(private usersService: UsersService, private utils: Utils) {}
 
   public async signup(email: string, password: string): Promise<User> {
-    return this.usersLogic.signup(email, password);
+    const hashed = await this.utils.hashing(password);
+    return this.usersService.create(email, hashed);
   }
 }

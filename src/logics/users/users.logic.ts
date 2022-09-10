@@ -10,6 +10,7 @@ const scrypt = promisify(_scrypt);
 export class UsersLogic {
   constructor(private usersService: UsersService) {}
 
+  // for remove
   public async signup(email: string, password: string): Promise<User> {
     const salt = randomBytes(8).toString('hex');
     const hash = (await scrypt(password, salt, 32)) as Buffer;
