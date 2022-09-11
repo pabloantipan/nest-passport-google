@@ -15,7 +15,13 @@ export class AuthController {
     @Session() session: any,
   ) {
     const user = await this.authLogic.signup(body.userEmail, body.userPassword);
-    console.log(user, session);
+    session.userId = user.userId;
+    return user;
+  }
+
+  @Post('/signin')
+  async signin(@Body() body: CreateUserDto, @Session() session: any) {
+    const user = await this.authLogic.signin(body.userEmail, body.userPassword);
     session.userId = user.userId;
     return user;
   }

@@ -9,16 +9,21 @@ export class UsersService {
     @InjectRepository(UserEntity) private repo: Repository<UserEntity>,
   ) {}
 
-  public create(userEmail: string, userPassword: string) {
+  public create(userEmail: string, userPassword: string): Promise<UserEntity> {
     const user = this.repo.create({ userEmail, userPassword });
     return this.repo.save(user);
   }
 
-  public findOne(userId: number) {
+  public findOne(userId: number): Promise<UserEntity> {
     if (!userId) {
       return null;
     }
-
     return this.repo.findOne({ where: { userId } });
+  }
+
+  public find(userEmail: string) {
+    return this.repo.find({
+      where: { userEmail },
+    });
   }
 }

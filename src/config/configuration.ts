@@ -8,6 +8,5 @@ export default () => {
   const config = yaml.load(
     readFileSync(join(__dirname, YAML_CONFIG_FILENAME), 'utf8'),
   ) as Record<string, any>;
-  // console.log('here!', process.env.db);
   return config;
 };
