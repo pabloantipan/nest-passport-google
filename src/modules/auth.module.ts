@@ -5,6 +5,7 @@ import { AuthLogic } from '@logics/auth/auth.logic';
 import { Module } from '@nestjs/common';
 import { APP_INTERCEPTOR } from '@nestjs/core';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { AuthService } from '@services/auth/auth.service';
 import { UsersService } from '@services/users/users.service';
 import { Utils } from '@utils/utils';
 
@@ -13,6 +14,7 @@ import { Utils } from '@utils/utils';
   controllers: [AuthController],
   providers: [
     AuthLogic,
+    AuthService,
     UsersService,
     Utils,
     {

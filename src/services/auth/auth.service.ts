@@ -1,12 +1,16 @@
-import { AuthLogic } from '@logics/auth/auth.logic';
-import { User } from '@models/user';
+import { UserEntity } from '@entities/user.entity';
 import { Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
 
 @Injectable()
 export class AuthService {
-  constructor(private authLogic: AuthLogic) {}
+  constructor(
+    @InjectRepository(UserEntity) private repo: Repository<UserEntity>,
+  ) {}
 
-  public async signup(email: string, password: string): Promise<User> {
-    return this.authLogic.signup(email, password);
+  public create(userEmail: string, userPassword: string): Promise<UserEntity> {
+    const user = this.repo.create({ userEmail, userPassword });
+    return this.repo.save(user);
   }
 }

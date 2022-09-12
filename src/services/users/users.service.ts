@@ -9,11 +9,6 @@ export class UsersService {
     @InjectRepository(UserEntity) private repo: Repository<UserEntity>,
   ) {}
 
-  public create(userEmail: string, userPassword: string): Promise<UserEntity> {
-    const user = this.repo.create({ userEmail, userPassword });
-    return this.repo.save(user);
-  }
-
   public findOne(userId: number): Promise<UserEntity> {
     if (!userId) {
       return null;
