@@ -27,12 +27,13 @@ export class AuthLogic {
 
   public async signin(email: string, password: string) {
     const [user] = await this.usersService.find(email);
+    console.log(user);
 
     if (!user) {
       throw new NotFoundException('user not found');
     }
 
-    if (this.utils.validatePassword(user, password)) {
+    if (!(await this.utils.validatePassword(user, password))) {
       throw new BadRequestException('bad password');
     }
     return user;

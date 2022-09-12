@@ -1,3 +1,4 @@
+###
 GET http://localhost:3000/users/
 
 ### Create a new user
@@ -5,6 +6,15 @@ POST http://localhost:3000/auth/signup
 Content-Type: application/json
 
 {
-  "userEmail": "test@test.cl",
-  "userPassword": "123456"
+  "userEmail": "john@doe.cl",
+  "userPassword": "doeJhon"
+}
+
+### Auth sign in
+POST http://localhost:3000/auth/signin
+Content-Type: application/json
+
+{
+  "userEmail": "john@doe.cl",
+  "userPassword": "doeJhon"
 }
