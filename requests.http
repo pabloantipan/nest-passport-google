@@ -19,8 +19,12 @@ Content-Type: application/json
   "userPassword": "doeJhon"
 }
 
+### Sign out
+Post http://localhost:3000/auth/signout
+
 ### Get the currently signed in user
 GET http://localhost:3000/users/whoami
 
 ### Find a particular user with a given ID
 GET http://localhost:3000/users/18
+
