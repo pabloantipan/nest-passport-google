@@ -26,6 +26,11 @@ export class AuthController {
     return user;
   }
 
+  @Post('/google')
+  async signinByGoogle() {
+    return 'Google here';
+  }
+
   @Post('/signout')
   signOut(@Session() session: any) {
     session.userId = null;
