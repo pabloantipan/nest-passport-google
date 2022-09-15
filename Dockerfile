@@ -21,4 +21,4 @@ COPY --from=builder /app/dist ./dist
 COPY --from=builder /app/node_modules ./node_modules
 CMD [ "sh", "-c", "npm run start:prod"]
 
-EXPOSE 3000
+EXPOSE 3001

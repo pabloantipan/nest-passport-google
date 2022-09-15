@@ -1,8 +1,8 @@
 ###
-GET http://localhost:3000/users/
+GET http://localhost:3001/users/
 
 ### Create a new user
-POST http://localhost:3000/auth/signup
+POST http://localhost:3001/auth/signup
 Content-Type: application/json
 
 {
@@ -11,7 +11,7 @@ Content-Type: application/json
 }
 
 ### Auth sign in
-POST http://localhost:3000/auth/signin
+POST http://localhost:3001/auth/signin
 Content-Type: application/json
 
 {
@@ -20,11 +20,15 @@ Content-Type: application/json
 }
 
 ### Sign out
-Post http://localhost:3000/auth/signout
+Post http://localhost:3001/auth/signout
 
 ### Get the currently signed in user
-GET http://localhost:3000/users/whoami
+GET http://localhost:3001/users/whoami
 
 ### Find a particular user with a given ID
-GET http://localhost:3000/users/18
+GET http://localhost:3001/users/18
 
+
+### Google
+
+Get http://localhost:3001/auth/signin/google

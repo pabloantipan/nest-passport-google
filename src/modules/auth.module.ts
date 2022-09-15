@@ -7,6 +7,7 @@ import { APP_INTERCEPTOR } from '@nestjs/core';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AuthService } from '@services/auth/auth.service';
 import { UsersService } from '@services/users/users.service';
+import { GoogleStrategy } from '@strategies/google-strategy';
 import { Utils } from '@utils/utils';
 
 @Module({
@@ -15,6 +16,7 @@ import { Utils } from '@utils/utils';
   providers: [
     AuthLogic,
     AuthService,
+    GoogleStrategy,
     UsersService,
     Utils,
     {

@@ -16,6 +16,7 @@ import { AuthModule } from '@modules/auth.module';
         'src/config/environments/dev.env',
         'src/config/environments/firebase.env',
         'src/config/environments/firebase.remote.env',
+        'src/config/environments/oauth-credentials.env',
       ],
       isGlobal: true,
       load: [configuration],

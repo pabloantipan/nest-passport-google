@@ -9,8 +9,9 @@ export class AppController {
     private configService: ConfigService,
   ) {}
 
-  @Get()
+  @Get('/')
   getHello(): string {
+    // console.log(this.configService.get('OAUTH_CLIENT_ID'));
     return this.appService.getHello();
   }
 }

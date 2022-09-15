@@ -1,8 +1,16 @@
 import { Serialize } from '@decorators/serialize.decorator';
 import { CreateUserDto } from '@dtos/users/create-user.dto';
 import { UserDto } from '@dtos/users/user.dto';
+import { GoogleAuthGuard } from '@guards/google-auth.guard';
 import { AuthLogic } from '@logics/auth/auth.logic';
-import { Body, Controller, Post, Session } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Post,
+  Session,
+  UseGuards,
+} from '@nestjs/common';
 
 @Controller('/auth')
 @Serialize(UserDto)
@@ -26,9 +34,16 @@ export class AuthController {
     return user;
   }
 
-  @Post('/google')
+  @Get('/signin/google')
+  @UseGuards(GoogleAuthGuard)
   async signinByGoogle() {
-    return 'Google here';
+    return 'Sign in by Google';
+  }
+
+  @Get('/google/redirect')
+  @UseGuards(GoogleAuthGuard)
+  async redirectByGoogle() {
+    return 'Google redirect';
   }
 
   @Post('/signout')
