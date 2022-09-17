@@ -9,7 +9,7 @@ export class AppController {
     private configService: ConfigService,
   ) {}
 
-  @Get()
+  @Get('/')
   getHello(): string {
     return this.appService.getHello();
   }
