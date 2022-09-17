@@ -8,11 +8,12 @@ import {
   Controller,
   Get,
   Post,
+  Req,
   Session,
   UseGuards,
 } from '@nestjs/common';
 
-@Controller('/auth')
+@Controller('/api/auth')
 @Serialize(UserDto)
 export class AuthController {
   constructor(private authLogic: AuthLogic) {}

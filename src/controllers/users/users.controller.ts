@@ -36,4 +36,14 @@ export class UsersController {
     }
     return user;
   }
+
+  @Get('status')
+  @UseGuards(AuthGuard)
+  async user(@CurrentUser() user: User) {
+    if (user) {
+      return { msg: 'Authenticated', user: user };
+    } else {
+      return { msg: 'Not Authenticated', user: user };
+    }
+  }
 }

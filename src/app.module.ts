@@ -8,6 +8,7 @@ import configuration from '@config/configuration';
 import { defaultConnection } from '../ormconfig';
 import { UsersModule } from '@modules/users.module';
 import { AuthModule } from '@modules/auth.module';
+import { PassportModule } from '@nestjs/passport';
 
 @Module({
   imports: [
@@ -21,9 +22,10 @@ import { AuthModule } from '@modules/auth.module';
       isGlobal: true,
       load: [configuration],
     }),
-    TypeOrmModule.forRoot(defaultConnection),
-    UsersModule,
     AuthModule,
+    TypeOrmModule.forRoot(defaultConnection),
+    PassportModule.register({ session: true }),
+    UsersModule,
     // UsersStorageModule,
   ],
   controllers: [AppController],

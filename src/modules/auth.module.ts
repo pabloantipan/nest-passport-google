@@ -1,6 +1,7 @@
 import { AuthController } from '@controllers/auth/auth.controller';
 import { UserEntity } from '@entities/user.entity';
 import { CurrentUserInterceptor } from '@interceptors/current-user.interceptor';
+import { GoogleSessionSerializer } from '@interceptors/google-session-serialize.interceptor';
 import { AuthLogic } from '@logics/auth/auth.logic';
 import { Module } from '@nestjs/common';
 import { APP_INTERCEPTOR } from '@nestjs/core';
@@ -14,15 +15,16 @@ import { Utils } from '@utils/utils';
   imports: [TypeOrmModule.forFeature([UserEntity])],
   controllers: [AuthController],
   providers: [
+    GoogleStrategy,
+    GoogleSessionSerializer,
     AuthLogic,
     AuthService,
-    GoogleStrategy,
     UsersService,
-    Utils,
     {
       provide: APP_INTERCEPTOR,
       useClass: CurrentUserInterceptor,
     },
+    Utils,
   ],
 })
 export class AuthModule {}
