@@ -11,13 +11,11 @@ export class GoogleSessionSerializer extends PassportSerializer {
   }
 
   serializeUser(user: UserEntity, done: Function) {
-    // console.log('serializeUser', user);
     done(null, user);
   }
 
   async deserializeUser(payload: any, done: Function) {
     const user = await this.usersService.findOne(payload.userId);
-    // console.log('deserializeUser', user, payload);
     return user ? done(null, user) : done(null, null);
   }
 }
