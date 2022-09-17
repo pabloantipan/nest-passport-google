@@ -27,8 +27,8 @@ services:
     ports:
       - 8081:8080
   
-  mci-auth-service:
-    image: mci-auth-service
+  nest-google-passport:
+    image: nest-google-passport
     ports:
       - 3000:3000
     links:
