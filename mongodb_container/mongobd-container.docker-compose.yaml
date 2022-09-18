@@ -1,0 +1,41 @@
+version: '3.9'
+
+services:
+  mongodb:
+    container_name: 'session-manager-mongodb'
+    image: mongo:5.0
+    ports:
+      - 27017:27017
+    volumes:
+      # seeding scripts
+      - ./mongo-entrypoint:/docker-entrypoint-initdb.d
+      # named volumes
+      - mongodb:/data/db
+      - mongoconfig:/data/configdb
+    environment:
+      - MONGO_INITDB_DATABASE=sessions
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=admin
+    networks:
+      - mongo_net
+
+  mongoclient:
+    # build will get tagged with 'image'
+    build: ./
+    container_name: 'session-manager-mongoclient'
+    image: mongoclient/mongoclient:4.0.0
+    networks:
+      - mongo_net
+    depends_on:
+      - mongodb
+    ports:
+      - 3300:3000
+
+volumes:
+  # default dir on Ubuntu: /var/lib/docker/volumes
+  mongodb:
+  mongoconfig:
+  
+networks:
+  mongo_net:
+    driver: bridge
