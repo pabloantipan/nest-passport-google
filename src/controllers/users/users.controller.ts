@@ -2,7 +2,6 @@ import { CurrentUser } from '@decorators/current-user.decorator';
 import { Serialize } from '@decorators/serialize.decorator';
 import { UserDto } from '@dtos/users/user.dto';
 import { AuthGuard } from '@guards/auth.guard';
-import { GoogleAuthGuard } from '@guards/google-auth.guard';
 import { User } from '@models/user';
 import {
   Controller,

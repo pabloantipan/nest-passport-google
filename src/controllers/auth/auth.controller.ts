@@ -8,7 +8,6 @@ import {
   Controller,
   Get,
   Post,
-  Req,
   Session,
   UseGuards,
 } from '@nestjs/common';
