@@ -15,7 +15,7 @@ export class GoogleSessionSerializer extends PassportSerializer {
   }
 
   async deserializeUser(payload: any, done: Function) {
-    const user = await this.usersService.findOne(payload.id);
+    const user = await this.usersService.findOne(payload.userId);
     return user ? done(null, user) : done(null, null);
   }
 }
