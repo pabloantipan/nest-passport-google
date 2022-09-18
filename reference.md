@@ -70,3 +70,7 @@ docker run \
     nest-passport-google-1 npm run start:debug
 
 ```
+
+## Docs
+
+https://www.virtasant.com/blog/stateful-vs-stateless-architecture-why-stateless-won#:~:text=Stateful%20services%20keep%20track%20of,resources%2C%20rather%20than%20the%20state.

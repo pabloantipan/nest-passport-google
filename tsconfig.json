@@ -32,6 +32,7 @@
       "@modules/*": ["src/modules/*"],
       "@repositories/*": ["src/repositories/*"],
       "@services/*": ["src/services/*"],
+      "@schemas/*": ["src/schemas/*"],
       "@storage/*": ["src/storage/*"],
       "@strategies/*": ["src/strategies/*"],
       "@utils/*": ["src/utils/*"],
