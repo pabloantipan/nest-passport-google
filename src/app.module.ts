@@ -2,13 +2,13 @@ import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { ConfigModule } from '@nestjs/config';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 import configuration from '@config/configuration';
-// import { UsersStorageModule } from '@storage/users/users-storage.module';
 import { defaultConnection } from '../ormconfig';
 import { UsersModule } from '@modules/users.module';
 import { AuthModule } from '@modules/auth.module';
 import { PassportModule } from '@nestjs/passport';
+import { MongooseModule } from '@nestjs/mongoose';
 
 @Module({
   imports: [
@@ -17,7 +17,6 @@ import { PassportModule } from '@nestjs/passport';
         'src/config/environments/dev.env',
         'src/config/environments/firebase.env',
         'src/config/environments/firebase.remote.env',
-        'src/config/environments/oauth-credentials.env',
       ],
       isGlobal: true,
       load: [configuration],
@@ -26,7 +25,16 @@ import { PassportModule } from '@nestjs/passport';
     TypeOrmModule.forRoot(defaultConnection),
     PassportModule.register({ session: true }),
     UsersModule,
-    // UsersStorageModule,
+    MongooseModule.forRootAsync({
+      imports: [ConfigModule],
+      connectionName: 'firstDB',
+      useFactory: async (configService: ConfigService) => ({
+        uri: await configService.get<string>('mongo.uri'),
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+      }),
+      inject: [ConfigService],
+    }),
   ],
   controllers: [AppController],
   providers: [AppService],

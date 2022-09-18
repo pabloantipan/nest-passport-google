@@ -15,7 +15,6 @@ docker run \
     -v `pwd`:/app \
     --network=mci-mysql-adminer \
     nest-passport-google-1 npm run start:debug
-
 ```
 
 ### Running local MySQL database

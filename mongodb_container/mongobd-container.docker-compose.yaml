@@ -1,9 +1,11 @@
 version: '3.9'
 
 services:
-  mongodb:
+  mongodb_container:
     container_name: 'session-manager-mongodb'
     image: mongo:5.0
+    expose: 
+      - "27017"
     ports:
       - 27017:27017
     volumes:
@@ -12,12 +14,8 @@ services:
       # named volumes
       - mongodb:/data/db
       - mongoconfig:/data/configdb
-    environment:
-      - MONGO_INITDB_DATABASE=sessions
-      - MONGO_INITDB_ROOT_USERNAME=admin
-      - MONGO_INITDB_ROOT_PASSWORD=admin
     networks:
-      - mongo_net
+      - ext_net
 
   mongoclient:
     # build will get tagged with 'image'
@@ -27,7 +25,7 @@ services:
     networks:
       - mongo_net
     depends_on:
-      - mongodb
+      - mongodb_container
     ports:
       - 3300:3000
 
@@ -38,4 +36,8 @@ volumes:
   
 networks:
   mongo_net:
-    driver: bridge
+    name: mongo-db-network
+  
+  ext_net:
+    name: mci-mysql-adminer
+    external: true

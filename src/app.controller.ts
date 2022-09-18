@@ -7,7 +7,9 @@ export class AppController {
   constructor(
     private readonly appService: AppService,
     private configService: ConfigService,
-  ) {}
+  ) {
+    // console.log(configService.get<string>('mongo.uri'));
+  }
 
   @Get('/')
   getHello(): string {

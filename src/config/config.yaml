@@ -24,3 +24,6 @@ oauth:
   clientId: '16504654868-dasc0feh72hfbna1g1c9gmcicc07e8ot.apps.googleusercontent.com'
   clientSecret: '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'
   callbackUrl: 'http://localhost:3001/api/auth/google/redirect'
+
+mongo:
+  uri: 'mongodb://mongodb_container:27017/sessions'
