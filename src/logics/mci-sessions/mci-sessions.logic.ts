@@ -1,5 +1,4 @@
-import { CreateMciSessionDto } from '@dtos/mci-sessions/create-mci-session.dto';
-import { Body, Injectable, Param, Post } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { MciSession } from '@schemas/mci-session.schema';
 import { MciSessionsService } from '@services/mci-sessions/mci-sessions.services';
 
