@@ -6,6 +6,9 @@ export type MciSessionDocument = MciSession & Document;
 @Schema()
 export class MciSession {
   @Prop()
+  sessionId: number;
+
+  @Prop()
   userId: string;
 
   @Prop()
@@ -15,7 +18,16 @@ export class MciSession {
   duration: string;
 
   @Prop()
+  secretId: string;
+
+  @Prop()
   token: string;
+
+  @Prop()
+  alive: string;
+
+  @Prop()
+  terminatedOn: string;
 }
 
 export const MciSessionSchema = SchemaFactory.createForClass(MciSession);
