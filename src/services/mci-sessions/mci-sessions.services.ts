@@ -1,22 +1,17 @@
-import { Model } from 'mongoose';
 import { CreateMciSessionDto } from '@dtos/mci-sessions/create-mci-session.dto';
 import { Injectable } from '@nestjs/common';
-import { InjectModel } from '@nestjs/mongoose';
-import { MciSession, MciSessionDocument } from '@schemas/mci-session.schema';
+import { MciSession } from '@schemas/mci-session.schema';
+import { MongoDbService } from '@services/mongodb/mongodb.service';
 
 @Injectable()
 export class MciSessionsService {
-  constructor(
-    @InjectModel(MciSession.name)
-    private mciSessionModel: Model<MciSessionDocument>,
-  ) {}
+  constructor(private mongoDbService: MongoDbService) {}
 
   async create(createMciSession: CreateMciSessionDto): Promise<MciSession> {
-    const createdMciSession = new this.mciSessionModel(createMciSession);
-    return createdMciSession.save();
+    return this.mongoDbService.create(createMciSession);
   }
 
   async findAll(): Promise<MciSession[]> {
-    return this.mciSessionModel.find().exec();
+    return this.mongoDbService.findAll();
   }
 }

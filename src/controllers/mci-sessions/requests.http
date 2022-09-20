@@ -1,0 +1,21 @@
+### Get up new session
+
+POST http://localhost:3001/mci-sessions/up
+Content-Type: application/json
+
+{
+  "userId": "1",
+  "duration": "2000",
+  "secretId": "25"
+}
+
+### 
+
+POST http://localhost:3001/mci-sessions/validate
+Content-Type: application/json
+
+{
+  "userId": "1",
+  "duration": "2000",
+  "secretId": "25"
+}

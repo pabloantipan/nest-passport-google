@@ -9,6 +9,7 @@ import { UsersModule } from '@modules/users.module';
 import { AuthModule } from '@modules/auth.module';
 import { PassportModule } from '@nestjs/passport';
 import { MongooseModule } from '@nestjs/mongoose';
+import { MciSessionsModule } from '@modules/mci-sessions.module';
 
 @Module({
   imports: [
@@ -25,16 +26,18 @@ import { MongooseModule } from '@nestjs/mongoose';
     TypeOrmModule.forRoot(defaultConnection),
     PassportModule.register({ session: true }),
     UsersModule,
-    MongooseModule.forRootAsync({
-      imports: [ConfigModule],
-      connectionName: 'firstDB',
-      useFactory: async (configService: ConfigService) => ({
-        uri: await configService.get<string>('mongo.uri'),
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-      }),
-      inject: [ConfigService],
-    }),
+    MongooseModule,
+    // MongooseModule.forRootAsync({
+    //   imports: [ConfigModule],
+    //   connectionName: 'session-mongodb',
+    //   useFactory: async (configService: ConfigService) => ({
+    //     uri: await configService.get<string>('mongo.uri'),
+    //     useNewUrlParser: true,
+    //     useUnifiedTopology: true,
+    //   }),
+    //   inject: [ConfigService],
+    // }),
+    MciSessionsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
