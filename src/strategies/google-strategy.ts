@@ -5,7 +5,7 @@ import { PassportStrategy } from '@nestjs/passport';
 import { UsersService } from '@services/users/users.service';
 import { Profile, Strategy } from 'passport-google-oauth20';
 
-// https://youtu.be/OitgkKTxht4
+// reference: https://youtu.be/OitgkKTxht4
 @Injectable()
 export class GoogleStrategy extends PassportStrategy(Strategy) {
   constructor(

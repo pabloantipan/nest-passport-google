@@ -18,7 +18,7 @@ export class MciSession {
   duration: string;
 
   @Prop()
-  secretId: string;
+  secretId: number;
 
   @Prop()
   token: string;

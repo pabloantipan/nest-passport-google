@@ -27,16 +27,6 @@ import { MciSessionsModule } from '@modules/mci-sessions.module';
     PassportModule.register({ session: true }),
     UsersModule,
     MongooseModule,
-    // MongooseModule.forRootAsync({
-    //   imports: [ConfigModule],
-    //   connectionName: 'session-mongodb',
-    //   useFactory: async (configService: ConfigService) => ({
-    //     uri: await configService.get<string>('mongo.uri'),
-    //     useNewUrlParser: true,
-    //     useUnifiedTopology: true,
-    //   }),
-    //   inject: [ConfigService],
-    // }),
     MciSessionsModule,
   ],
   controllers: [AppController],

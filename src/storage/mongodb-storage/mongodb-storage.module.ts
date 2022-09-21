@@ -19,12 +19,9 @@ import { MongoDbService } from '@services/mongodb/mongodb.service';
       connectionName: 'session-mongodb',
       useFactory: async (configService: ConfigService) => ({
         uri: await configService.get<string>('mongo.uri'),
-        // useNewUrlParser: true,
-        // useUnifiedTopology: true,
       }),
       inject: [ConfigService],
     }),
-    // MongoDbService,
     MongooseModule.forFeatureAsync(
       [
         {
