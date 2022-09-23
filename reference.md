@@ -4,6 +4,7 @@ docker build -t nest-passport-google-1 -f Dockerfile .
 
 docker run -it -p 3001:3001 nest-passport-google-1
 
+
 ```
 ### Running local with live-reload
 ```
@@ -28,6 +29,7 @@ docker run --name demo-mysql --rm -p 3306:3306 -e MYSQL_ROOT_PASSWORD=qweqwe123 
 ```
 docker build -t nest-passport-google-1 -f Dockerfile .
 
+
 docker-compose stop
 docker-compose kill
 docker-compose rm
@@ -50,11 +52,13 @@ docker tag nest-passport-google-1 gcr.io/cfe-project-357217/nest-passport-google
 
 docker push gcr.io/cfe-project-357217/nest-passport-google-1
 
+
 ```
 
 ### via GCloud Build
 ```
 gcloud builds submit --tag gcr.io/cfe-project-357217/nest-passport-google-1
+
 
 ```
 
@@ -62,11 +66,13 @@ gcloud builds submit --tag gcr.io/cfe-project-357217/nest-passport-google-1
 ```
 docker build -t nest-passport-google-1 -f Dockerfile .
 
+
 docker run \
     -p 3001:3001 \
     -v nodemodules:/src/node_modules \
     -v `pwd`:/app \
     nest-passport-google-1 npm run start:debug
+
 
 ```
 
