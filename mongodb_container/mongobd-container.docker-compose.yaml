@@ -1,0 +1,43 @@
+version: '3.9'
+
+services:
+  mongodb_container:
+    container_name: 'session-manager-mongodb'
+    image: mongo:5.0
+    expose: 
+      - "27017"
+    ports:
+      - 27017:27017
+    volumes:
+      # seeding scripts
+      - ./mongo-entrypoint:/docker-entrypoint-initdb.d
+      # named volumes
+      - mongodb:/data/db
+      - mongoconfig:/data/configdb
+    networks:
+      - ext_net
+
+  mongoclient:
+    # build will get tagged with 'image'
+    build: ./
+    container_name: 'session-manager-mongoclient'
+    image: mongoclient/mongoclient:4.0.0
+    networks:
+      - mongo_net
+    depends_on:
+      - mongodb_container
+    ports:
+      - 3300:3000
+
+volumes:
+  # default dir on Ubuntu: /var/lib/docker/volumes
+  mongodb:
+  mongoconfig:
+  
+networks:
+  mongo_net:
+    name: mongo-db-network
+  
+  ext_net:
+    name: mci-mysql-adminer
+    external: true

@@ -8,9 +8,11 @@ import {
   Get,
   NotFoundException,
   Param,
+  Req,
   UseGuards,
 } from '@nestjs/common';
 import { UsersService } from '@services/users/users.service';
+import { Request } from 'express';
 
 @Controller('users')
 @Serialize(UserDto)
@@ -26,6 +28,15 @@ export class UsersController {
   @UseGuards(AuthGuard)
   async whoAmI(@CurrentUser() user: User) {
     return user;
+  }
+
+  @Get('status')
+  user(@Req() request: Request) {
+    if (request.user) {
+      return { msg: 'Authenticated' };
+    } else {
+      return { msg: 'Not Authenticated' };
+    }
   }
 
   @Get('/:id')

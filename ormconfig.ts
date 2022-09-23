@@ -3,7 +3,7 @@ import { DataSourceOptions } from 'typeorm';
 export const defaultConnection: Partial<DataSourceOptions> = {
   name: 'default',
   type: 'mysql',
-  host: 'mysql_db_container', // 'mci-mysql-adminer', // 'mysql_db_container',
+  host: 'mysql_db_container',
   port: 3306,
   username: process.env.USERS_DB_USER || 'root',
   password: process.env.USERS_DB_PASSWORD || 'qweqwe123',

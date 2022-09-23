@@ -37,4 +37,15 @@ export class AuthLogic {
     }
     return user;
   }
+
+  public async validateUser(email: string) {
+    const users = await this.usersService.find(email);
+    if (users.length !== 0) {
+      return users[0];
+    }
+
+    const genericGooglePassword = 'some-complex-password';
+    const newGoogleUser = this.authService.create(email, genericGooglePassword);
+    return newGoogleUser;
+  }
 }

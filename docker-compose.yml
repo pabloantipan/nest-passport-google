@@ -30,7 +30,7 @@ services:
   nest-google-passport:
     image: nest-google-passport
     ports:
-      - 3000:3000
+      - 3001:3001
     links:
       - mysql_db_container
       
