@@ -21,10 +21,9 @@ export class EncryptionService {
     this.password = this.configService.get('ENCRYPTION_PASSWORD');
     this.salt = this.configService.get('ENCRYPTION_SALT') as BinaryLike;
     this.iv = randomBytes(16);
-    this.setKey();
   }
 
-  private async setKey() {
+  public async setKey() {
     this.key = (await promisify(scrypt)(
       this.password,
       this.salt,
@@ -50,6 +49,6 @@ export class EncryptionService {
       decipher.final(),
     ]);
 
-    return decryptedText;
+    return decryptedText.toString();
   }
 }

@@ -24,6 +24,7 @@ describe('EncryptionService', () => {
     }).compile();
 
     encryptionService = module.get(EncryptionService);
+    await encryptionService.setKey();
   });
 
   it('should be defined', () => {
