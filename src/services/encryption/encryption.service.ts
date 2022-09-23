@@ -18,10 +18,11 @@ export class EncryptionService {
   private password: string;
   private key: CipherKey;
   private iv: BinaryLike;
-  private salt = 'salt' as BinaryLike;
+  private salt: BinaryLike;
 
   constructor(private configService: ConfigService) {
-    this.password = this.configService.get('encryption.password');
+    this.password = this.configService.get('ENCRYPTION_PASSWORD');
+    this.salt = this.configService.get('ENCRYPTION_SALT') as BinaryLike;
     this.iv = randomBytes(16);
     this.setKey();
   }
