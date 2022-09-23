@@ -10,9 +10,6 @@ import {
 import { createDecipheriv } from 'crypto';
 import { promisify } from 'util';
 
-// const iv = randomBytes(16);
-// const password = 'Password used to generate key';
-
 @Injectable()
 export class EncryptionService {
   private password: string;
