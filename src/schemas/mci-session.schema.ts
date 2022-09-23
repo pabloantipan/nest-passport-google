@@ -15,13 +15,7 @@ export class MciSession {
   CreatedOn: string;
 
   @Prop()
-  duration: string;
-
-  @Prop()
-  secretId: number;
-
-  @Prop()
-  token: string;
+  duration: number;
 
   @Prop()
   alive: string;

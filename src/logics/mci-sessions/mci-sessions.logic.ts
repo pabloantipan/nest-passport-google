@@ -3,6 +3,8 @@ import { Injectable } from '@nestjs/common';
 import { MciSession } from '@schemas/mci-session.schema';
 import { MciSessionsService } from '@services/mci-sessions/mci-sessions.services';
 
+const MCI_SESSION_DURATION_SEC = 30;
+
 @Injectable()
 export class MciSessionsLogic {
   constructor(private mciSessionsService: MciSessionsService) {}
@@ -11,7 +13,6 @@ export class MciSessionsLogic {
     const newSession = {
       userId: userId,
       duration: '1',
-      secretId: 1,
     } as CreateMciSessionDto;
     return this.mciSessionsService.create(newSession);
   }
