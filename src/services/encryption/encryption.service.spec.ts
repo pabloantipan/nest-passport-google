@@ -32,8 +32,9 @@ describe('EncryptionService', () => {
   });
 
   it('should encrypt and decrypt text', async () => {
-    const textToTest = 'oli';
+    const textToTest = 'this-text-is-for-testing-encryption';
     const encryptedText = await encryptionService.encrypt(textToTest);
+    console.log(encryptedText.toString());
     const decryptedText = await encryptionService.decrypt(encryptedText);
     expect(decryptedText).toEqual(textToTest);
   });
