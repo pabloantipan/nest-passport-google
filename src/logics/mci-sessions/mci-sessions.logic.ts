@@ -6,6 +6,7 @@ import { MciSession } from '@schemas/mci-session.schema';
 import { EncryptionService } from '@services/encryption/encryption.service';
 import { MciSessionsService } from '@services/mci-sessions/mci-sessions.services';
 import { Utils } from '@utils/utils';
+import { session } from 'passport';
 
 const MCI_SESSION_DURATION_SEC = 30;
 
@@ -21,6 +22,9 @@ export class MciSessionsLogic {
   }
 
   public async sessionUp(userId: string): Promise<MciSession> {
+    // watch out for multiSession condition and maxSessionsLimit
+
+    // up new session
     const currentDate = new Date();
     const setSessionAlive = true;
     const setSessionTerminatedOn = this.utils.addLapseTimeToDate(
@@ -39,8 +43,10 @@ export class MciSessionsLogic {
     return this.mciSessionsService.create(newMciSession);
   }
 
-  public async validate(sessionId: string): Promise<MciSession[]> {
-    return this.mciSessionsService.findAll();
+  public async validate(sessionId: string): Promise<any> {
+    const response = this.mciSessionsService.findBySessionId(sessionId);
+    return response;
+
   }
 
   public async sessionDown(sessionId: string): Promise<boolean> {

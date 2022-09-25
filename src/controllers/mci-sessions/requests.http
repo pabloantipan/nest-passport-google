@@ -13,7 +13,5 @@ POST http://localhost:3001/mci-sessions/validate
 Content-Type: application/json
 
 {
-  "userId": "1",
-  "duration": "2000",
-  "secretId": "25"
+  "token": "312c2c4fbc9eb99e99a09eb0cc598341d09569b09146f33d71a4d68ccf50a024c129ea7b18eef2d0c51bcae3abe770b84e7cdbbc874ee0a2321b89a27572ab8b5a33ca6003623085df3b65bfbe0dc5f5385a624f3d84df9dc9d5bb85b72cef41780806930538a699c2f67731ebec8dd4eb2cff01a2f4f37069cfa2ba"
 }

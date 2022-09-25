@@ -5,23 +5,29 @@ export type MciSessionDocument = MciSession & Document;
 
 @Schema()
 export class MciSession {
-  @Prop()
+  @Prop({ required: true })
   sessionId: string;
 
-  @Prop()
+  @Prop({ required: true })
   userId: string;
 
-  @Prop()
+  @Prop({ required: true })
   createdOn: string;
 
-  @Prop()
+  @Prop({ default: 5 })
   duration: number;
 
-  @Prop()
+  @Prop({ default: true })
   alive: string;
 
-  @Prop()
+  @Prop({ required: true })
   terminateOn: string;
+
+  @Prop({ default: false })
+  multiSessionAllowed: boolean;
+
+  @Prop({ default: 1 })
+  maxSessionsLimit: number;
 }
 
 export const MciSessionSchema = SchemaFactory.createForClass(MciSession);
