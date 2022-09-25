@@ -18,9 +18,12 @@ export class EncryptionService {
   private salt: BinaryLike;
 
   constructor(private configService: ConfigService) {
-    this.password = this.configService.get('ENCRYPTION_PASSWORD');
-    this.salt = this.configService.get('ENCRYPTION_SALT') as BinaryLike;
-    this.iv = randomBytes(16);
+    this.password = this.configService.get('SESSION_ENCRYPTION_PASSWORD');
+    this.salt = this.configService.get('SESSION_ENCRYPTION_SALT') as BinaryLike;
+    this.iv = Buffer.from(
+      this.configService.get('SESSION_ENCRYPTION_IV').toString(),
+      'hex',
+    );
   }
 
   public async setKey() {
@@ -60,5 +63,9 @@ export class EncryptionService {
 
   public async decryptLegibleString(encryptedText: string) {
     return await this.decrypt(Buffer.from(encryptedText, 'hex'));
+  }
+
+  public generateIV(): string {
+    return randomBytes(16).toString('hex');
   }
 }
