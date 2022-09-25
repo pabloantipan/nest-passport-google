@@ -18,6 +18,7 @@ import { MciSessionsModule } from '@modules/mci-sessions.module';
         'src/config/environments/dev.env',
         'src/config/environments/firebase.env',
         'src/config/environments/firebase.remote.env',
+        'src/config/environments/secrets.env',
       ],
       isGlobal: true,
       load: [configuration],

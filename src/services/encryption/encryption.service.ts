@@ -42,7 +42,7 @@ export class EncryptionService {
     return encryptedText;
   }
 
-  public async decrypt(encryptedText: NodeJS.ArrayBufferView) {
+  public async decrypt(encryptedText: NodeJS.ArrayBufferView): Promise<string> {
     const decipher = createDecipheriv('aes-256-ctr', this.key, this.iv);
     const decryptedText = Buffer.concat([
       decipher.update(encryptedText),
@@ -50,5 +50,15 @@ export class EncryptionService {
     ]);
 
     return decryptedText.toString();
+  }
+
+  public async encryptToLegibleString(
+    textToEncrypt: BinaryLike,
+  ): Promise<string> {
+    return (await this.encrypt(textToEncrypt)).toString('hex');
+  }
+
+  public async decryptLegibleString(encryptedText: string) {
+    return await this.decrypt(Buffer.from(encryptedText, 'hex'));
   }
 }

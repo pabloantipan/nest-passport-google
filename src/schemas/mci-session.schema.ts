@@ -6,13 +6,13 @@ export type MciSessionDocument = MciSession & Document;
 @Schema()
 export class MciSession {
   @Prop()
-  sessionId: number;
+  sessionId: string;
 
   @Prop()
   userId: string;
 
   @Prop()
-  CreatedOn: string;
+  createdOn: string;
 
   @Prop()
   duration: number;

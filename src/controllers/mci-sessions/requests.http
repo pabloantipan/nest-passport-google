@@ -4,9 +4,7 @@ POST http://localhost:3001/mci-sessions/up
 Content-Type: application/json
 
 {
-  "userId": "1",
-  "duration": "2000",
-  "secretId": 1
+  "userId": "1"
 }
 
 ### 

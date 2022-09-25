@@ -10,6 +10,7 @@ import {
   MciSessionDocument,
   MciSessionSchema,
 } from '@schemas/mci-session.schema';
+import { EncryptionService } from '@services/encryption/encryption.service';
 import { MongoDbService } from '@services/mongodb/mongodb.service';
 
 @Module({
@@ -40,7 +41,7 @@ import { MongoDbService } from '@services/mongodb/mongodb.service';
       'session-mongodb',
     ),
   ],
-  providers: [MongoDbService],
+  providers: [MongoDbService, EncryptionService],
   exports: [MongoDbService],
 })
 export class MongoDbStorageModule {}

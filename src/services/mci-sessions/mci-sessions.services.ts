@@ -14,4 +14,8 @@ export class MciSessionsService {
   async findAll(): Promise<MciSession[]> {
     return this.mongoDbService.findAll();
   }
+
+  async findBySessionId(sessionId: string): Promise<MciSession> {
+    return this.mongoDbService.findBySessionId(sessionId);
+  }
 }
