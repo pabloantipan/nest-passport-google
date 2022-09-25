@@ -20,10 +20,7 @@ export class EncryptionService {
   constructor(private configService: ConfigService) {
     this.password = this.configService.get('SESSION_ENCRYPTION_PASSWORD');
     this.salt = this.configService.get('SESSION_ENCRYPTION_SALT') as BinaryLike;
-    this.iv = Buffer.from(
-      this.configService.get('SESSION_ENCRYPTION_IV').toString(),
-      'hex',
-    );
+    this.iv = randomBytes(16);
   }
 
   public async setKey() {
