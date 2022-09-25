@@ -21,7 +21,7 @@ export class MciSession {
   alive: string;
 
   @Prop()
-  terminatedOn: string;
+  terminateOn: string;
 }
 
 export const MciSessionSchema = SchemaFactory.createForClass(MciSession);

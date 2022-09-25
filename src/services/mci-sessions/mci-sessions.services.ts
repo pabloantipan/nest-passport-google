@@ -1,4 +1,4 @@
-import { CreateMciSessionDto } from '@dtos/mci-sessions/create-mci-session.dto';
+import { MciSessionInterface } from '@interfaces/mci-sessions/mci-session.interface';
 import { Injectable } from '@nestjs/common';
 import { MciSession } from '@schemas/mci-session.schema';
 import { MongoDbService } from '@services/mongodb/mongodb.service';
@@ -7,8 +7,8 @@ import { MongoDbService } from '@services/mongodb/mongodb.service';
 export class MciSessionsService {
   constructor(private mongoDbService: MongoDbService) {}
 
-  async create(createMciSession: CreateMciSessionDto): Promise<MciSession> {
-    return this.mongoDbService.create(createMciSession);
+  async create(mciSession: MciSessionInterface): Promise<MciSession> {
+    return this.mongoDbService.create(mciSession);
   }
 
   async findAll(): Promise<MciSession[]> {

@@ -13,9 +13,17 @@ export class Utils {
     return salt + '.' + hash.toString('hex');
   }
 
-  public async validatePassword(user: User, password: string) {
+  public async validatePassword(
+    user: User,
+    password: string,
+  ): Promise<boolean> {
     const [salt, storeHash] = user.userPassword.split('.');
     const hash = (await scrypt(password, salt, 32)) as Buffer;
     return storeHash === hash.toString('hex');
+  }
+
+  public addLapseTimeToDate(moment: Date, addingSeconds: number): Date {
+    moment.setSeconds(moment.getSeconds() + addingSeconds);
+    return moment;
   }
 }
