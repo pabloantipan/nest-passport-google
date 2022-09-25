@@ -33,21 +33,19 @@ describe('EncryptionService', () => {
 
   it('should encrypt and decrypt an string', async () => {
     const textToTest = 'this-text-is-for-testing-encryption';
-    const encryptedText = await encryptionService.encrypt(textToTest);
+    const encryptedText = await encryptionService.encryptToBuffer(textToTest);
     // console.log(encryptedText.toString());
-    const decryptedText = await encryptionService.decrypt(encryptedText);
+    const decryptedText = await encryptionService.decryptToBuffer(
+      encryptedText,
+    );
     expect(decryptedText).toEqual(textToTest);
   });
 
   it('should encrypt and decrypt an string in a legible way', async () => {
     const textToTest = 'this-text-is-for-testing-encryption';
-    const encryptedText = await encryptionService.encryptToLegibleString(
-      textToTest,
-    );
+    const encryptedText = await encryptionService.encrypt(textToTest);
     // console.log(encryptedText);
-    const decryptedText = await encryptionService.decryptLegibleString(
-      encryptedText,
-    );
+    const decryptedText = await encryptionService.decrypt(encryptedText);
     // console.log(decryptedText);
     expect(decryptedText).toEqual(textToTest);
   });

@@ -1,4 +1,3 @@
-import { CreateMciSessionDto } from '@dtos/mci-sessions/create-mci-session.dto';
 import { MciSessionInterface } from '@interfaces/mci-sessions/mci-session.interface';
 import { SessionIdInterface } from '@interfaces/mci-sessions/session-id.interface';
 import { Injectable } from '@nestjs/common';
@@ -56,8 +55,6 @@ export class MciSessionsLogic {
       randomKey: Math.floor(Math.random() * 10000),
     } as SessionIdInterface;
 
-    return await this.encryptionService.encryptToLegibleString(
-      JSON.stringify(sessionId),
-    );
+    return await this.encryptionService.encrypt(JSON.stringify(sessionId));
   }
 }
