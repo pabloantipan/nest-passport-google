@@ -10,6 +10,10 @@ db:
     USER: 'root'
     PASSWORD: 'qweqwe123'
 
+sessions:
+  multiSessionAllowed: true
+  maxSessionsLimit: 2
+
 cookieSession:
   secret: 'cookie-session-secret-777'
 

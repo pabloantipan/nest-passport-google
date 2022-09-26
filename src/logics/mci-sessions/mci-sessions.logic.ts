@@ -4,14 +4,16 @@ import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { MciSession } from '@schemas/mci-session.schema';
 import { EncryptionService } from '@services/encryption/encryption.service';
-import { MciSessionsService } from '@services/mci-sessions/mci-sessions.services';
+import { MciSessionsService } from '@services/mci-sessions/mci-sessions.service';
 import { Utils } from '@utils/utils';
-import { session } from 'passport';
 
-const MCI_SESSION_DURATION_SEC = 30;
+const MCI_SESSION_DURATION_SEC = 5;
 
 @Injectable()
 export class MciSessionsLogic {
+  multiSessionAllowed: boolean;
+  maxSessionsLimit: number;
+
   constructor(
     private mciSessionsService: MciSessionsService,
     private encryptionService: EncryptionService,
@@ -19,11 +21,38 @@ export class MciSessionsLogic {
     private utils: Utils,
   ) {
     this.encryptionService.setKey();
+    this.multiSessionAllowed = this.configService.get(
+      'sessions.multiSessionAllowed',
+    );
+    this.maxSessionsLimit = this.configService.get('sessions.maxSessionsLimit');
+  }
+
+  public async getAliveSessionOfUser(userId: string) {
+    const aliveUserSessions =
+      await this.mciSessionsService.findAliveSessionsOfUser(userId);
+    const currentTime = new Date();
+    const sessionsToKill = aliveUserSessions.filter(
+      (session) => session.terminateOn.getTime() <= currentTime.getTime(),
+    );
+    const tokensToKill = sessionsToKill.map((session) => session.sessionId);
+    if (tokensToKill.length > 0) {
+      await this.mciSessionsService.killSessionsByToken(tokensToKill);
+    }
+    return aliveUserSessions.filter(
+      (session) => session.terminateOn.getTime() > currentTime.getTime(),
+    );
   }
 
   public async sessionUp(userId: string): Promise<MciSession> {
     // watch out for multiSession condition and maxSessionsLimit
-
+    const aliveUserSessions = await this.getAliveSessionOfUser(userId);
+    const actualAliveSessions = aliveUserSessions.length;
+    if (!this.multiSessionAllowed) {
+      throw new Error('multi sessions per user are not allowed');
+    }
+    if (actualAliveSessions >= this.maxSessionsLimit) {
+      throw new Error('Max sessions for this user reached');
+    }
     // up new session
     const currentDate = new Date();
     const setSessionAlive = true;
@@ -44,9 +73,10 @@ export class MciSessionsLogic {
   }
 
   public async validate(sessionId: string): Promise<any> {
-    const response = this.mciSessionsService.findBySessionId(sessionId);
+    const response = await this.mciSessionsService.findSessionByToken(
+      sessionId,
+    );
     return response;
-
   }
 
   public async sessionDown(sessionId: string): Promise<boolean> {

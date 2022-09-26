@@ -5,6 +5,4 @@ export interface MciSessionInterface {
   duration: number;
   alive: boolean;
   terminateOn: Date;
-  multiSessionAllowed: boolean;
-  maxSessionsLimit: number;
 }

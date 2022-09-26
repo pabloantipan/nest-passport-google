@@ -15,7 +15,15 @@ export class MciSessionsService {
     return this.mongoDbService.findAll();
   }
 
-  async findBySessionId(sessionId: string): Promise<MciSession> {
-    return this.mongoDbService.findBySessionId(sessionId);
+  async findSessionByToken(sessionId: string): Promise<MciSession[]> {
+    return this.mongoDbService.findSessionByToken(sessionId);
+  }
+
+  async findAliveSessionsOfUser(sessionId: string): Promise<MciSession[]> {
+    return this.mongoDbService.findAliveSessionsOfUser(sessionId);
+  }
+
+  async killSessionsByToken(tokens: string[]): Promise<any> {
+    this.mongoDbService.killSessionsByToken(tokens);
   }
 }

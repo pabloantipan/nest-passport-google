@@ -12,22 +12,16 @@ export class MciSession {
   userId: string;
 
   @Prop({ required: true })
-  createdOn: string;
+  createdOn: Date;
 
   @Prop({ default: 5 })
   duration: number;
 
   @Prop({ default: true })
-  alive: string;
+  alive: boolean;
 
   @Prop({ required: true })
-  terminateOn: string;
-
-  @Prop({ default: false })
-  multiSessionAllowed: boolean;
-
-  @Prop({ default: 1 })
-  maxSessionsLimit: number;
+  terminateOn: Date;
 }
 
 export const MciSessionSchema = SchemaFactory.createForClass(MciSession);
