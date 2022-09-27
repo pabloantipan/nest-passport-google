@@ -6,8 +6,9 @@ import { MciSession } from '@schemas/mci-session.schema';
 import { EncryptionService } from '@services/encryption/encryption.service';
 import { MciSessionsService } from '@services/mci-sessions/mci-sessions.service';
 import { Utils } from '@utils/utils';
+import { threadId } from 'worker_threads';
 
-const MCI_SESSION_DURATION_SEC = 5;
+const MCI_SESSION_DURATION_SEC = 120;
 
 @Injectable()
 export class MciSessionsLogic {
@@ -73,14 +74,30 @@ export class MciSessionsLogic {
   }
 
   public async validate(sessionId: string): Promise<any> {
-    const response = await this.mciSessionsService.findSessionByToken(
+    // get token data from db
+    const sessionData = await this.mciSessionsService.findSessionByToken(
       sessionId,
     );
-    return response;
+    if (sessionData.length === 0) throw new Error('Session does not exist');
+    // get if session is alive
+    if (!sessionData[0].alive)
+      throw new Error('Session was already terminated');
+
+    const currentDate = new Date();
+    if (sessionData[0].terminateOn.getTime() <= currentDate.getTime()) {
+      // kill session if time out
+      this.mciSessionsService.killSessionsByToken([sessionId]);
+      throw new Error('Session is terminated by timeout');
+    }
+    // return validation
+    return 'Session is valid';
   }
 
   public async sessionDown(sessionId: string): Promise<boolean> {
-    return true;
+    return this.mciSessionsService
+      .killSessionsByToken([sessionId])
+      .then(() => true)
+      .catch((e) => e);
   }
 
   private async generateSessionId(userId: string, currentDate: Date) {
