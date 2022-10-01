@@ -19,10 +19,12 @@
     "noFallthroughCasesInSwitch": false,
     "paths": {
       "@config/*": ["src/config/*"],
+      "@constants/*": ["src/constants/*"],
       "@controllers/*": ["src/controllers/*"],
       "@decorators/*": ["src/decorators/*"],
       "@dtos/*": ["src/dtos/*"],
       "@entities/*": ["src/entities/*"],
+      "@exceptions/*": ["src/exceptions/*"],
       "@guards/*": ["src/guards/*"],
       "@interceptors/*": ["src/interceptors/*"],
       "@interfaces/*": ["src/interfaces/*"],

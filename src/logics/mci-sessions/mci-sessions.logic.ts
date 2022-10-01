@@ -1,3 +1,10 @@
+import {
+  MaxMultiSessionReached,
+  MultiSessionIsNotAllowed,
+  SessionDoesNotExist,
+  SessionHasJustTerminated,
+  SessionWasAlreadyTerminated,
+} from '@exceptions/exceptions';
 import { MciSessionInterface } from '@interfaces/mci-sessions/mci-session.interface';
 import { SessionIdInterface } from '@interfaces/mci-sessions/session-id.interface';
 import { Injectable } from '@nestjs/common';
@@ -6,7 +13,6 @@ import { MciSession } from '@schemas/mci-session.schema';
 import { EncryptionService } from '@services/encryption/encryption.service';
 import { MciSessionsService } from '@services/mci-sessions/mci-sessions.service';
 import { Utils } from '@utils/utils';
-import { threadId } from 'worker_threads';
 
 const MCI_SESSION_DURATION_SEC = 120;
 
@@ -49,10 +55,10 @@ export class MciSessionsLogic {
     const aliveUserSessions = await this.getAliveSessionOfUser(userId);
     const actualAliveSessions = aliveUserSessions.length;
     if (!this.multiSessionAllowed) {
-      throw new Error('multi sessions per user are not allowed');
+      throw new MultiSessionIsNotAllowed();
     }
     if (actualAliveSessions >= this.maxSessionsLimit) {
-      throw new Error('Max sessions for this user reached');
+      throw new MaxMultiSessionReached();
     }
     // up new session
     const currentDate = new Date();
@@ -78,16 +84,16 @@ export class MciSessionsLogic {
     const sessionData = await this.mciSessionsService.findSessionByToken(
       sessionId,
     );
-    if (sessionData.length === 0) throw new Error('Session does not exist');
+    if (sessionData.length === 0)
+      throw new SessionDoesNotExist('Session does not exist');
     // get if session is alive
-    if (!sessionData[0].alive)
-      throw new Error('Session was already terminated');
+    if (!sessionData[0].alive) throw new SessionWasAlreadyTerminated();
 
     const currentDate = new Date();
     if (sessionData[0].terminateOn.getTime() <= currentDate.getTime()) {
       // kill session if time out
       this.mciSessionsService.killSessionsByToken([sessionId]);
-      throw new Error('Session is terminated by timeout');
+      throw new SessionHasJustTerminated();
     }
     // return validation
     return 'Session is valid';
