@@ -4,7 +4,7 @@ import {
   USER_MAX_SESSIONS_REACHED,
   USER_SESSION_HAS_JUST_TERMINATED,
   USER_SESSION_WAS_ALREADY_TERMINATED,
-} from '@constants/response-codes.constants';
+} from '@constants/logic-codes.constants';
 
 export class SessionHasJustTerminated extends Error {
   private _statusCode: number = USER_SESSION_HAS_JUST_TERMINATED;
@@ -66,7 +66,7 @@ export class SessionDoesNotExist extends Error {
 
   constructor(message: string = undefined) {
     super(message);
-    if (!message) this.message = '';
+    if (!message) this.message = 'Session does not exist.';
     this.name = 'SessionDoesNotExist';
   }
 
