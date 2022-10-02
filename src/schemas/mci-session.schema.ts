@@ -1,10 +1,10 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document } from 'mongoose';
 
-export type MciSessionDocument = MciSession & Document;
+export type MciSessionDocument = SchemaOfMciSession & Document;
 
 @Schema()
-export class MciSession {
+export class SchemaOfMciSession {
   @Prop({ required: true })
   sessionId: string;
 
@@ -24,4 +24,5 @@ export class MciSession {
   terminateOn: Date;
 }
 
-export const MciSessionSchema = SchemaFactory.createForClass(MciSession);
+export const MciSessionSchema =
+  SchemaFactory.createForClass(SchemaOfMciSession);

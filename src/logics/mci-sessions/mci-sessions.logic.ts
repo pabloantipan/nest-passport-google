@@ -9,7 +9,7 @@ import { MciSessionInterface } from '@interfaces/mci-sessions/mci-session.interf
 import { SessionIdInterface } from '@interfaces/mci-sessions/session-id.interface';
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import { MciSession } from '@schemas/mci-session.schema';
+import { SchemaOfMciSession } from '@schemas/mci-session.schema';
 import { EncryptionService } from '@services/encryption/encryption.service';
 import { MciSessionsService } from '@services/mci-sessions/mci-sessions.service';
 import { Utils } from '@utils/utils';
@@ -34,7 +34,7 @@ export class MciSessionsLogic {
     this.maxSessionsLimit = this.configService.get('sessions.maxSessionsLimit');
   }
 
-  public async getAliveSessionOfUser(userId: string) {
+  private async getAliveSessionOfUser(userId: string) {
     const aliveUserSessions =
       await this.mciSessionsService.findAliveSessionsOfUser(userId);
     const currentTime = new Date();
@@ -50,7 +50,7 @@ export class MciSessionsLogic {
     );
   }
 
-  public async sessionUp(userId: string): Promise<MciSession> {
+  public async sessionUp(userId: string): Promise<SchemaOfMciSession> {
     // watch out for multiSession condition and maxSessionsLimit
     const aliveUserSessions = await this.getAliveSessionOfUser(userId);
     const actualAliveSessions = aliveUserSessions.length;
@@ -84,8 +84,7 @@ export class MciSessionsLogic {
     const sessionData = await this.mciSessionsService.findSessionByToken(
       sessionId,
     );
-    if (sessionData.length === 0)
-      throw new SessionDoesNotExist('Session does not exist');
+    if (sessionData.length === 0) throw new SessionDoesNotExist();
     // get if session is alive
     if (!sessionData[0].alive) throw new SessionWasAlreadyTerminated();
 

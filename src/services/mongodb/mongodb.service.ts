@@ -1,30 +1,30 @@
 import { MciSessionInterface } from '@interfaces/mci-sessions/mci-session.interface';
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { MciSession, MciSessionDocument } from '@schemas/mci-session.schema';
+import { SchemaOfMciSession, MciSessionDocument } from '@schemas/mci-session.schema';
 import { Model } from 'mongoose';
 
 @Injectable()
 export class MongoDbService {
   constructor(
-    @InjectModel(MciSession.name, 'session-mongodb')
+    @InjectModel(SchemaOfMciSession.name, 'session-mongodb')
     private mciSessionModel: Model<MciSessionDocument>,
   ) {}
 
-  public async create(mciSession: MciSessionInterface): Promise<MciSession> {
+  public async create(mciSession: MciSessionInterface): Promise<SchemaOfMciSession> {
     const createdMciSession = new this.mciSessionModel(mciSession);
     return createdMciSession.save();
   }
 
-  public async findAll(): Promise<MciSession[]> {
+  public async findAll(): Promise<SchemaOfMciSession[]> {
     return this.mciSessionModel.find().exec();
   }
 
-  public async findSessionByToken(sessionId: string): Promise<MciSession[]> {
+  public async findSessionByToken(sessionId: string): Promise<SchemaOfMciSession[]> {
     return this.mciSessionModel.find({ sessionId }).exec();
   }
 
-  public async findAliveSessionsOfUser(userId: string): Promise<MciSession[]> {
+  public async findAliveSessionsOfUser(userId: string): Promise<SchemaOfMciSession[]> {
     return this.mciSessionModel.find({ userId, alive: true }).exec();
   }
 

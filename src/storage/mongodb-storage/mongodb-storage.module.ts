@@ -6,7 +6,7 @@ import {
   MongooseModule,
 } from '@nestjs/mongoose';
 import {
-  MciSession,
+  SchemaOfMciSession,
   MciSessionDocument,
   MciSessionSchema,
 } from '@schemas/mci-session.schema';
@@ -27,7 +27,7 @@ import { Utils } from '@utils/utils';
     MongooseModule.forFeatureAsync(
       [
         {
-          name: MciSession.name,
+          name: SchemaOfMciSession.name,
           useFactory: async () => {
             const schema = MciSessionSchema;
             // eslint-disable-next-line @typescript-eslint/no-var-requires
